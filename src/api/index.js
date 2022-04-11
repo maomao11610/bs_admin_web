@@ -105,7 +105,8 @@ export const getSearchOrder = ({pageNum, pageSize, searchName})=>ajax(BASE+'/ord
     pageSize,
     searchName
 }, 'GET')
-
+// 内容列表
+export const getExamineList = ()=>ajax(BASE+'/order/examine', {}, 'GET')
 
 
 

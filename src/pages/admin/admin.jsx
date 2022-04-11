@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-04-09 15:12:39
- * @LastEditTime: 2022-04-10 16:24:45
- * @LastEditors: your name
+ * @LastEditTime: 2022-04-11 20:49:19
+ * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \admin-client\src\pages\admin\admin.jsx
  */
@@ -24,6 +24,7 @@ import Bar from './pages/charts/bar'
 import Line from './pages/charts/line'
 import Pie from './pages/charts/pie'
 import Order from './pages/order/order'
+import Examine from './pages/order/examine'
 import NotFound from './pages/not-found/not-found'
 
 const { Footer, Sider, Content } = Layout
@@ -54,7 +55,7 @@ export default class Admin extends Component {
                            <Route path="/charts/bar" component={Bar}/>
                            <Route path="/charts/pie" component={Pie}/>
                            <Route path="/charts/line" component={Line}/>
-                           <Route path="/order" component={Order}/>
+                           <Route path="/order/examine" component={Examine}/>
                            <Route path="/order/list" component={Order}/>
                            <Route component={NotFound}/>  {/*上面没有一个匹配, 直接显示*/}
                        </Switch>
