@@ -1,0 +1,9 @@
+.list li {
+  margin: 5px auto;
+  font-weight: bold;
+  height: 30px;
+  width: 100%;
+}
+.list li .pic {
+  height: 50px !important;
+}

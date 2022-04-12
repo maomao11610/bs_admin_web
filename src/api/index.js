@@ -106,11 +106,11 @@ export const getSearchOrder = ({pageNum, pageSize, searchName})=>ajax(BASE+'/ord
     searchName
 }, 'GET')
 // 内容列表
-export const getExamineList = ()=>ajax(BASE+'/order/examine', {}, 'GET')
-
-
-
-
+export const getExamineList = (pageSize,pageNum)=>ajax(BASE+'/order/examine', {pageSize,pageNum}, 'GET')
+// 获取对应的详情表单
+export const getExamineDetail=(saleId)=>ajax(BASE+'/order/examine/detail',{saleId},'GET')
+// 点击审核更新examine内容的status
+export const postExamineUpdate = (saleId)=>ajax(BASE+'/order/examine/update', {saleId}, 'POST')
 // reqWeather()
 
 /*
