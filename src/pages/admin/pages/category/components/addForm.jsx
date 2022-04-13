@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2022-04-09 15:12:39
+ * @LastEditTime: 2022-04-13 16:43:38
+ * @LastEditors: Please set LastEditors
+ * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD
+ * @FilePath: \admin-client\src\pages\admin\pages\category\components\addForm.jsx
+ */
 import React, {Component} from 'react'
 import { Form, Select, Input } from 'antd'
 import PropTypes from 'prop-types'
@@ -23,22 +31,22 @@ class AddForm extends Component {
         }
         return (
             <Form {...formItemLayout}>
-                <Form.Item label="所属分类">
+                <Form.Item label="所属品牌">
                     {getFieldDecorator('parentId', { initialValue: parentId })(
                         <Select>
-                            <Option value='0'>一级分类</Option>
+                            <Option value='0'>car</Option>
                             {
                                 categoryList.map(item => <Option value={item._id} key={item._id}>{item.name}</Option>)
                             }
                         </Select>
                     )}
                 </Form.Item>
-                <Form.Item label="分类名称">
+                <Form.Item label="车系名称">
                     {getFieldDecorator('categoryName', {
-                            rules: [{required: true, message: '分类名称不能为空!'}],
+                            rules: [{required: true, message: '车系名称不能为空!'}],
                             initialValue: ''
                         })(
-                            <Input placeholder="请输入分类名称"/>
+                            <Input placeholder="请输入车系名称"/>
                         )
                     }
                 </Form.Item>

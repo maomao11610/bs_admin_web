@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2022-04-09 15:12:39
+ * @LastEditTime: 2022-04-13 16:42:55
+ * @LastEditors: Please set LastEditors
+ * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @FilePath: \admin-client\src\pages\admin\pages\category\components\updateForm.jsx
+ */
 /**
  * 更新分类的form组件
  */
@@ -24,12 +32,12 @@ class UpdateForm extends Component {
         }
         return (
             <Form {...formItemLayout}>
-                <Form.Item label="分类名称">
+                <Form.Item label="所属品牌">
                     {getFieldDecorator('categoryName', {
-                            rules: [{required: true, message: '分类名称不能为空!'}],
+                            rules: [{required: true, message: '车系名称不能为空!'}],
                             initialValue: categoryName
                         })(
-                            <Input placeholder="请输入分类名称"/>
+                            <Input placeholder="请输入车系名称"/>
                         )
                     }
                 </Form.Item>

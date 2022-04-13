@@ -107,7 +107,7 @@ class ProductAddUpdate extends Component {
         this.props.form.validateFields(async (error, values)=>{  // 进行表单验证, 如果通过了, 才发送请求
             if(!error) {
                 // 1. 收集数据, 并封装成product对象
-                const {name, desc, price, categoryIds} = values
+                const {name, desc, price, categoryIds,milleage} = values
                 let pCategoryId, categoryId
                 if(categoryIds.length===1) {
                     pCategoryId = '0'
@@ -120,7 +120,7 @@ class ProductAddUpdate extends Component {
                 const detail = this.editor.current.getDetail()
                 // console.log('@@@@',values, imgs, detail)
                 const product = {
-                    name, desc, price, pCategoryId, categoryId, imgs, detail
+                    name, desc, price, pCategoryId, categoryId, imgs, detail,milleage
                 }
                 if(this.isUpdate) {  // 如果是更新, 需要添加_id
                     product._id = this.product._id
@@ -234,15 +234,35 @@ class ProductAddUpdate extends Component {
                             )
                         }
                     </Item>
-                    <Item label="商品分类">
+                    <Item label="里程">
+                        {
+                            getFieldDecorator('milleage', {
+                                rules: [{required: true, message: '必须输入里程'}],
+                                initialValue: product.milleage
+                            })(
+                                <Input placeholder="请输入里程"/>
+                            )
+                        }
+                    </Item>
+                    {/* <Item label="品牌">
+                        {
+                            getFieldDecorator('brand', {
+                                rules: [{required: true, message: '必须输入品牌'}],
+                                initialValue: product.brand
+                            })(
+                                <Input placeholder="请输入品牌"/>
+                            )
+                        }
+                    </Item> */}
+                    <Item label="品牌">
                         {
                             getFieldDecorator('categoryIds', {
-                                rules: [{required: true, message: '必须指定商品分类'}],
+                                rules: [{required: true, message: '必须指定品牌'}],
                                 initialValue: categoryIds
                             })(
                                 <Cascader options={this.state.options}   /*需要显示的列表数据数组*/
                                           loadData={this.loadData}  /*当选择某个列表项, 加载下一级列表的监听回调*/
-                                          placeholder="请指定商品分类"/>
+                                          placeholder="请指定品牌"/>
                             )
                         }
                     </Item>

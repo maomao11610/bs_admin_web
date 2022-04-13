@@ -11,8 +11,8 @@ const Item = List.Item
 
 export default class ProductDetail extends Component {
     state = {
-        cName1: '', // 一级分类名称
-        cName2: '', // 二级分类名称
+        cName1: '', // 品牌
+        cName2: '', // 车系
     }
 
     async componentDidMount() {
@@ -63,7 +63,7 @@ export default class ProductDetail extends Component {
         // BrowserRouter
         // const { name, desc, price, detail, imgs } = this.props.location.state.product
         // HashRouter
-        const { name, desc, price, detail, imgs } = memoryUtils.product
+        const { name, desc, price, detail, imgs ,milleage, pCategoryId} = memoryUtils.product
 
         const title= (
             <span>
@@ -91,7 +91,15 @@ export default class ProductDetail extends Component {
                         <span>{price}元</span>
                     </Item>
                     <Item>
-                        <span className="left">所属分类:</span>
+                        <span className="left">里程:</span>
+                        <span>{milleage}</span>
+                    </Item>
+                    <Item>
+                        <span className="left">品牌:</span>
+                        <span>{pCategoryId}</span>
+                    </Item>
+                    <Item>
+                        <span className="left">所属品牌:</span>
                         {/*<span>{cName}</span>*/}
                         <span>{cName1} {cName2 ? '--> '+cName2 : ''}</span>
                     </Item>

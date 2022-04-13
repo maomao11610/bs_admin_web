@@ -22,7 +22,7 @@ export default class Category extends Component {
     initColumns = ()=>{
         this.columns = [
             {
-                title: '分类名称',
+                title: '品牌',
                 dataIndex: 'name'  // 指定显示数据的属性名
             },
             {
@@ -30,12 +30,12 @@ export default class Category extends Component {
                 width: 300,
                 render: (category) => (  // 返回需要显示的界面标签
                     <span>
-                        <LinkButton onClick={()=>this.showUpdateCategory(category)}>修改分类</LinkButton>
+                        <LinkButton onClick={()=>this.showUpdateCategory(category)}>修改品牌</LinkButton>
 
                         {/*如何向事件回调函数传递参数: 先定义一个匿名函数, 在函数调用处理的函数并传入数据*/}
                         {
                             this.state.parentId==='0' ? (
-                                <LinkButton onClick={()=>this.showSubCategoryList(category)}>查看子分类</LinkButton>
+                                <LinkButton onClick={()=>this.showSubCategoryList(category)}>查看车系</LinkButton>
                             ) : null
                         }
                     </span>
@@ -59,7 +59,7 @@ export default class Category extends Component {
                 this.setState({subCategoryList: categoryList})  // 更新二级分类状态
             }
         } else {
-            message.error('获取分类列表失败')
+            message.error('获取品牌列表失败')
         }
     }
 
@@ -182,9 +182,9 @@ export default class Category extends Component {
 
     render() {
         const { categoryList, subCategoryList, loading, parentId, parentName, showStatus } = this.state  // 读取状态数据
-        const title = parentId==='0' ? '一级分类列表' : (    // card的左侧
+        const title = parentId==='0' ? '品牌分类管理' : (    // card的左侧
             <span>
-                <LinkButton onClick={this.showCategoryList}>一级分类列表</LinkButton>
+                <LinkButton onClick={this.showCategoryList}>品牌列表</LinkButton>
                 <Icon type="arrow-right" style={{marginRight: 5}}/>
                 <span>{parentName}</span>
             </span>
@@ -208,10 +208,10 @@ export default class Category extends Component {
                        }}>
                 </Table>
 
-                <Modal title="添加分类" visible={showStatus === 1} onOk={this.addCategory} onCancel={this.handleAddCancel}>
+                <Modal title="添加品牌" visible={showStatus === 1} onOk={this.addCategory} onCancel={this.handleAddCancel}>
                     <AddForm categoryList={categoryList} parentId={parentId} setForm={(form) => {this.addForm = form}} />
                 </Modal>
-                <Modal title="修改分类" visible={showStatus === 2} onOk={this.updateCategory} onCancel={this.handleUpdateCancel}>
+                <Modal title="修改品牌" visible={showStatus === 2} onOk={this.updateCategory} onCancel={this.handleUpdateCancel}>
                     <UpdateForm categoryName={category.name} setForm={(form) => {this.updateForm = form}}/>
                 </Modal>
             </Card>
