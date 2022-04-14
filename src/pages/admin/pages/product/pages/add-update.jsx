@@ -1,7 +1,7 @@
 /**
  * Product的添加和更新的子路由组件
  */
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { Card, Form, Input, Cascader, Button, Icon, message } from 'antd'
 import LinkButton from '../../../../../components/link-button/LinkButton'
 import { reqCategoryList, reqAddUpdateProduct } from '../../../../../api/index'
@@ -16,25 +16,25 @@ class ProductAddUpdate extends Component {
         super(props)
 
         // 创建用来保存ref标识的标签对象的容器
-        this.pw= React.createRef()
+        this.pw = React.createRef()
         this.editor = React.createRef()
     }
     state = {
-        options: []
+        options: [],
     }
 
     // 验证价格的自定义验证函数
-    validatePrice = (rule, value, callback)=>{
+    validatePrice = (rule, value, callback) => {
         // console.log(rule, value, callback)
-        if(value*1>0) {  // 验证通过
+        if (value * 1 > 0) {  // 验证通过
             callback()
         } else { // 验证没通过
             callback('价格必须大于0')
         }
     }
 
-    initOptions = async (categoryList)=>{
-        const options = categoryList.map(item=>{  // 根据categoryList生成options数组
+    initOptions = async (categoryList) => {
+        const options = categoryList.map(item => {  // 根据categoryList生成options数组
             return {
                 value: item._id,
                 label: item.name,
@@ -43,18 +43,18 @@ class ProductAddUpdate extends Component {
         })
 
         // 如果是一个二级分类商品的更新
-        const {isUpdate, product} = this
-        const {pCategoryId} = product
-        if(isUpdate && pCategoryId!=='0') {
+        const { isUpdate, product } = this
+        const { pCategoryId } = product
+        if (isUpdate && pCategoryId !== '0') {
             const subCategoryList = await this.getCategoryList(pCategoryId)  // 获取对应的二级分类列表
-            const childrenOptions = subCategoryList.map(item=>{  // 生成二级下拉列表的options
+            const childrenOptions = subCategoryList.map(item => {  // 生成二级下拉列表的options
                 return {
                     label: item.name,
                     value: item._id,
                     isLeaf: true
                 }
             })
-            const targetOption = options.find(option=>option.value===pCategoryId)  // 找到当前商品对应的一级option对象
+            const targetOption = options.find(option => option.value === pCategoryId)  // 找到当前商品对应的一级option对象
             targetOption.children = childrenOptions  // 关联对应的一级option上
         }
 
@@ -64,11 +64,11 @@ class ProductAddUpdate extends Component {
     }
 
     // 异步获取一级/二级分类列表, 并显示   -- async函数的返回值是一个新的promise对象, promise的结果和值由async函数的结果来决定
-    getCategoryList = async (parentId)=>{
+    getCategoryList = async (parentId) => {
         const result = await reqCategoryList(parentId)
-        if(result.status===0) {
+        if (result.status === 0) {
             const categoryList = result.data
-            if (parentId==='0') {  // 如果是一级分类列表
+            if (parentId === '0') {  // 如果是一级分类列表
                 this.initOptions(categoryList)
             } else { // 二级列表
                 return categoryList  // 返回二级列表 ==> 当前async函数返回的promise就会进入成功状态且value为categoryList
@@ -83,8 +83,8 @@ class ProductAddUpdate extends Component {
 
         const subCategoryList = await this.getCategoryList(targetOption.value)  // 根据选中的分类, 请求获取二级分类列表
         targetOption.loading = false  // 隐藏loading
-        if(subCategoryList && subCategoryList.length>0) {  // 二级分类数组有数据
-            const childrenOptions = subCategoryList.map(item=>{
+        if (subCategoryList && subCategoryList.length > 0) {  // 二级分类数组有数据
+            const childrenOptions = subCategoryList.map(item => {
                 return {
                     label: item.name,
                     value: item._id,
@@ -95,7 +95,6 @@ class ProductAddUpdate extends Component {
         } else {  // 当前选中的分类没有二级分类
             targetOption.isLeaf = true
         }
-
         this.setState({  // 更新options状态
             options: [...this.state.options],  // this.state.options里的某一项数据发生了改变
         })
@@ -103,13 +102,13 @@ class ProductAddUpdate extends Component {
     }
 
     // 提交
-    submit = ()=>{
-        this.props.form.validateFields(async (error, values)=>{  // 进行表单验证, 如果通过了, 才发送请求
-            if(!error) {
+    submit = () => {
+        this.props.form.validateFields(async (error, values) => {  // 进行表单验证, 如果通过了, 才发送请求
+            if (!error) {
                 // 1. 收集数据, 并封装成product对象
-                const {name, desc, price, categoryIds,milleage} = values
+                const { name, desc, price, categoryIds, milleage } = values
                 let pCategoryId, categoryId
-                if(categoryIds.length===1) {
+                if (categoryIds.length === 1) {
                     pCategoryId = '0'
                     categoryId = categoryIds[0]
                 } else {
@@ -120,17 +119,18 @@ class ProductAddUpdate extends Component {
                 const detail = this.editor.current.getDetail()
                 // console.log('@@@@',values, imgs, detail)
                 const product = {
-                    name, desc, price, pCategoryId, categoryId, imgs, detail,milleage
+                    name, desc, price, pCategoryId, categoryId, imgs, detail, milleage
                 }
-                if(this.isUpdate) {  // 如果是更新, 需要添加_id
+                if (this.isUpdate) {  // 如果是更新, 需要添加_id
                     product._id = this.product._id
                 }
 
                 // 2. 调用接口请求函数去添加/更新
-                const result = await reqAddUpdateProduct(product)
+                const result = await reqAddUpdateProduct(product);
+                // console.log(product);
 
                 // 3. 根据结果提示
-                if (result.status===0) {
+                if (result.status === 0) {
                     message.success(`${this.isUpdate ? '更新' : '添加'}商品成功!`)
                     this.props.history.goBack()
                 } else {
@@ -163,7 +163,7 @@ class ProductAddUpdate extends Component {
     }
 
     componentDidMount() {
-        this.getCategoryList('0')
+        this.getCategoryList('0');
     }
     // 在卸载之前清除保存的数据
     componentWillUnmount() {
@@ -172,11 +172,11 @@ class ProductAddUpdate extends Component {
     }
 
     render() {
-        const {isUpdate, product} = this
-        const {pCategoryId, categoryId, imgs, detail} = product
+        const { isUpdate, product } = this
+        const { pCategoryId, categoryId, imgs, detail } = product
         const categoryIds = []  // 用来接收级联分类ID的数组
-        if(isUpdate) {
-            if(pCategoryId==='0') {  // 商品是一个一级分类的商品
+        if (isUpdate) {
+            if (pCategoryId === '0') {  // 商品是一个一级分类的商品
                 categoryIds.push(categoryId)
             } else {  // 商品是一个二级分类的商品
                 categoryIds.push(pCategoryId)
@@ -186,10 +186,10 @@ class ProductAddUpdate extends Component {
 
         const title = (  // 头部左侧标题
             <span>
-                <LinkButton onClick={()=>{this.props.history.goBack()}}>
-                    <Icon type="arrow-left" style={{fontSize:16}}/>
+                <LinkButton onClick={() => { this.props.history.goBack() }}>
+                    <Icon type="arrow-left" style={{ fontSize: 16 }} />
                 </LinkButton>
-                <span>{ this.isUpdate ? '修改商品' : '添加商品'}</span>
+                <span>{this.isUpdate ? '修改商品' : '添加商品'}</span>
             </span>
         )
         const formItemLayout = {  // 指定Item布局的配置对象
@@ -197,27 +197,27 @@ class ProductAddUpdate extends Component {
             wrapperCol: { span: 10 }  // 右侧包裹的宽度
         }
 
-        const {getFieldDecorator} = this.props.form
+        const { getFieldDecorator } = this.props.form
         return (
             <Card title={title}>
                 <Form {...formItemLayout}>
                     <Item label="商品名称">
                         {
                             getFieldDecorator('name', {
-                                rules: [{required: true, message: '必须输入商品名称'}],
+                                rules: [{ required: true, message: '必须输入商品名称' }],
                                 initialValue: product.name
                             })(
-                                <Input placeholder="请输入商品名称"/>
+                                <Input placeholder="请输入商品名称" />
                             )
                         }
                     </Item>
                     <Item label="商品描述">
                         {
                             getFieldDecorator('desc', {
-                                rules: [{required: true, message: '必须输入商品描述'}],
+                                rules: [{ required: true, message: '必须输入商品描述' }],
                                 initialValue: product.desc
                             })(
-                                <TextArea placeholder="请输入商品描述" autosize={{ minRows: 1, maxRows: 6 }}/>
+                                <TextArea placeholder="请输入商品描述" autosize={{ minRows: 1, maxRows: 6 }} />
                             )
                         }
                     </Item>
@@ -225,54 +225,44 @@ class ProductAddUpdate extends Component {
                         {
                             getFieldDecorator('price', {
                                 rules: [
-                                    {required: true, message: '必须输入商品价格'},
-                                    {validator: this.validatePrice}
+                                    { required: true, message: '必须输入商品价格' },
+                                    { validator: this.validatePrice }
                                 ],
                                 initialValue: product.price
                             })(
-                                <Input type="number" addonAfter="元" placeholder="请输入商品价格"/>
+                                <Input type="number" addonAfter="元" placeholder="请输入商品价格" />
                             )
                         }
                     </Item>
                     <Item label="里程">
                         {
                             getFieldDecorator('milleage', {
-                                rules: [{required: true, message: '必须输入里程'}],
+                                rules: [{ required: true, message: '必须输入里程' }],
                                 initialValue: product.milleage
                             })(
-                                <Input placeholder="请输入里程"/>
+                                <Input placeholder="请输入里程" />
                             )
                         }
                     </Item>
-                    {/* <Item label="品牌">
-                        {
-                            getFieldDecorator('brand', {
-                                rules: [{required: true, message: '必须输入品牌'}],
-                                initialValue: product.brand
-                            })(
-                                <Input placeholder="请输入品牌"/>
-                            )
-                        }
-                    </Item> */}
                     <Item label="品牌">
                         {
                             getFieldDecorator('categoryIds', {
-                                rules: [{required: true, message: '必须指定品牌'}],
+                                rules: [{ required: true, message: '必须指定品牌' }],
                                 initialValue: categoryIds
                             })(
                                 <Cascader options={this.state.options}   /*需要显示的列表数据数组*/
-                                          loadData={this.loadData}  /*当选择某个列表项, 加载下一级列表的监听回调*/
-                                          placeholder="请指定品牌"/>
+                                    loadData={this.loadData}  /*当选择某个列表项, 加载下一级列表的监听回调*/
+                                    placeholder="请指定品牌" />
                             )
                         }
                     </Item>
-                    <Item label="商品图片" labelCol={{span: 4}} wrapperCol={{span: 16}}>
-                        <PicturesWall ref={this.pw} imgs={imgs}/>
+                    <Item label="商品图片" labelCol={{ span: 4 }} wrapperCol={{ span: 16 }}>
+                        <PicturesWall ref={this.pw} imgs={imgs} />
                     </Item>
-                    <Item label="商品详情" labelCol={{span: 4}} wrapperCol={{span: 16}}>
-                        <RichTextEditor ref={this.editor} detail={detail}/>
+                    <Item label="商品详情" labelCol={{ span: 4 }} wrapperCol={{ span: 16 }}>
+                        <RichTextEditor ref={this.editor} detail={detail} />
                     </Item>
-                    <Item wrapperCol={{span:10, offset: 4}}>
+                    <Item wrapperCol={{ span: 10, offset: 4 }}>
                         <Button type="primary" onClick={this.submit}>提交</Button>
                     </Item>
                 </Form>

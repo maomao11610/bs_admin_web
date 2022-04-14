@@ -34,10 +34,6 @@ export default class ProductHome extends Component {
                 dataIndex: 'milleage',
             },
             {
-                title: '品牌',
-                dataIndex: ' milleage',
-            },
-            {
                 width: 120,
                 title: '价格',
                 dataIndex: 'price',
@@ -142,7 +138,8 @@ export default class ProductHome extends Component {
             <span>
                 <Select value={searchType} style={{width:120}} onChange={value=>this.setState({searchType: value})}>
                     <Option value="productName">按名称搜索</Option>
-                    <Option value="productDesc">按描述搜索</Option>
+                    <Option value="productPrice">按价格搜索</Option>
+                    <Option value="productMilleage">按里程搜索</Option>
                 </Select>
                 <Input placeholder='请输入关键字' style={{width:150, margin:'0 15px'}} value={searchName}
                        onChange={event => this.setState({searchName:event.target.value})}/>
