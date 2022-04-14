@@ -1,4 +1,4 @@
-# day01
+# complete01
 ## 1. 项目开发准备
     1). 描述项目
     2). 技术选型 
@@ -173,7 +173,7 @@ module.exports = override(
    
 
      
-# day02
+# complete02
 ## 1. 后台应用
     启动后台应用: mongodb服务必须启动
     使用postman测试接口(根据接口文档):
@@ -272,7 +272,7 @@ module.exports = override(
            
 
 
-# day03
+# complete03
 ## 1. Header组件
     1). 界面静态布局
         三角形效果
@@ -310,7 +310,7 @@ module.exports = override(
 
 
 
-# day04: Category组件
+# complete04: Category组件
 ## 1. 使用antd组件构建分类列表界面
     Card
     Table
@@ -346,7 +346,7 @@ module.exports = override(
         
         
 
-# day05
+# complete05
 ## 1. 添加分类
     1). 界面
         antd组件: Modal, Form, Select, Input
@@ -429,7 +429,7 @@ module.exports = override(
 
 
 
-# day06
+# complete06
 ## 1. ProductAddUpdate
     1). 基本界面
         Card / Form / Input / TextArea / Button
@@ -463,7 +463,7 @@ module.exports = override(
 
 
 
-# day07
+# complete07
 ## 1. RichTextEditor
     1). 使用基于react的富文本编程器插件库: react-draft-wysiwyg   (what you see is what you get)
             npm install react-draft-wysiwyg
@@ -496,7 +496,7 @@ module.exports = override(
 
 
 
-# day08
+# complete08
 ## 1. setState()的使用
     1). setState(updater, [callback]),
         updater为返回stateChange对象的函数: (state, props) => stateChange
@@ -568,7 +568,7 @@ module.exports = override(
 
 
 
-# day09
+# complete09
 ## 1. redux理解
 	什么?: redux是专门做状态管理的独立第3方库, 不是react插件, 但一般都用在react项目中
 	作用?: 对应用中状态进行集中式的管理(写/读)
@@ -618,7 +618,7 @@ module.exports = override(
 		
 
 
-# day10
+# complete10
 ## 1. 在项目中搭建redux整套环境
     1). store.js
     2). reducer.js
@@ -683,7 +683,7 @@ module.exports = override(
             将包含n个dispatch方法的对象分别作为函数属性传入UI组件
         通过store绑定state变化的监听, 在回调函数中根据store中最新的state数据更新容器组件状态, 从而更新UI组件
 
-# day11
+# complete11
 ## 1. 数据可视化
     1). echarts(百度) ==> echarts-for-react
     2). g2(阿里) ==> bizCharts
@@ -701,4 +701,6 @@ module.exports = override(
         a. 问题: 刷新某个路由路径时, 会出现404的错误
         b. 原因: 项目根路径后的path路径会被当作后台路由路径, 去请求对应的后台路由, 但没有
         c. 解决: 使用自定义中间件去读取返回index页面展现
-    
+# complete12
+1). 后台整体功能搭建完成包括数据库接口调试（chhart模块有待精炼）
+

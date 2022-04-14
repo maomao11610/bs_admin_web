@@ -129,10 +129,11 @@ export default class LineGraph extends Component {
     scale = {
         temperature: { min: 0 },
         city: {
+            // 伦敦 东京
             formatter: v => {
                 return {
-                    London: '伦敦',
-                    Tokyo: '东京'
+                    London: '国产',
+                    Tokyo: '进口'
                 }[v]
             }
         }

@@ -41,7 +41,7 @@ export default class Bar extends Component {
             sales: 38
         },
         {
-            month: "59月",
+            month: "9月",
             sales: 68
         },
         {

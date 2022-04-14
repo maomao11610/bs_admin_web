@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2022-04-09 15:12:39
+ * @LastEditTime: 2022-04-14 15:56:30
+ * @LastEditors: Please set LastEditors
+ * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @FilePath: \admin-client\src\pages\admin\pages\charts\bar.jsx
+ */
 /**
  * 后台管理的柱状图路由组件
  */
@@ -24,14 +32,14 @@ export default class Bar extends Component {
     getOption= (sales, stores)=>{
         return {
             title: {
-                text: 'ECharts 销量与库存'
+                text: '销量城市Top6 销量与库存分析(单位：辆)'
             },
             tooltip: {},
             legend: {
                 data: ['销量', '库存']
             },
             xAxis: {
-                data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+                data: ['北京', '上海', '深圳', '成都', '西安', '南京']
             },
             yAxis: {},
             series: [
@@ -60,7 +68,7 @@ export default class Bar extends Component {
                     <Button type='primary' onClick={this.updateData}>更新</Button>
                 </Card>
 
-                <Card title='柱状图一'>
+                <Card title='城市销量与库存分析'>
                     <ReactEcharts option={this.getOption(sales, stores)} style={{paddingTop:40, height:500}}/>
                 </Card>
             </div>

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-09 15:12:39
- * @LastEditTime: 2022-04-11 20:50:15
+ * @LastEditTime: 2022-04-14 16:09:44
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \admin-client\src\config\menuConfig.js
@@ -14,7 +14,7 @@ const menuList = [
     isPublic: true, // 公开的
   },
   {
-    title: '商品',
+    title: '商品管理',
     key: '/products',
     icon: 'appstore',
     children: [ // 子菜单列表
@@ -48,17 +48,17 @@ const menuList = [
     icon: 'area-chart',
     children: [
       {
-        title: '柱形图',
+        title: '城市销售库存分析',
         key: '/charts/bar',
         icon: 'bar-chart'
       },
       {
-        title: '折线图',
+        title: '系统年销售分析',
         key: '/charts/line',
         icon: 'line-chart'
       },
       {
-        title: '饼图',
+        title: '趣摩用户数据分析',
         key: '/charts/pie',
         icon: 'pie-chart'
       },
